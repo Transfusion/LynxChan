@@ -595,9 +595,9 @@ function insertBoard(parameters, userData, callback) {
 
 exports.createBoard = function(captchaId, parameters, userData, callback) {
 
-  var role = userData.globalRole || 4;
+  var admin = userData.globalRole <= 1;
 
-  if (role > 1 && restrictedBoardCreation) {
+  if (!admin && restrictedBoardCreation) {
     callback(lang.errDeniedBoardCreation);
     return;
   }
