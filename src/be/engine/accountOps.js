@@ -129,7 +129,7 @@ function createAccount(parameters, role, callback) {
         password : hash
       };
 
-      if (role !== undefined) {
+      if (role !== undefined && role !== null) {
         newUser.globalRole = +role;
       }
 
@@ -164,7 +164,7 @@ exports.registerUser = function(parameters, cb, role, override, captchaId) {
   if (/\W/.test(parameters.login)) {
     cb(lang.errInvalidLogin);
     return;
-  } else if (role !== undefined && isNaN(role)) {
+  } else if (role !== undefined && role !== null && isNaN(role)) {
     cb(lang.errInvalidRole);
     return;
   }
