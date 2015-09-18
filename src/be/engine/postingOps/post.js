@@ -353,9 +353,8 @@ function getPostFlag(req, parameters, userData, postId, thread, board,
 
 }
 
-function getPostMarkdown(req, parameters, userData, thread, board, callback) {
-
-  var wishesToSign = common.doesUserWishesToSign(userData, parameters);
+function getPostMarkdown(req, parameters, userData, thread, board,
+    wishesToSign, callback) {
 
   parameters.message = common.applyFilters(board.filters, parameters.message);
 
@@ -423,13 +422,16 @@ function getThread(req, parameters, userData, board, callback) {
 
       miscOps.sanitizeStrings(parameters, common.postingParameters);
 
+      var wishesToSign = common.doesUserWishesToSign(userData, parameters);
+
       // style exception, too simple
       common.checkForTripcode(parameters, function setTripCode(error,
           parameters) {
         if (error) {
           callback(error);
         } else {
-          getPostMarkdown(req, parameters, userData, thread, board, callback);
+          getPostMarkdown(req, parameters, userData, thread, board,
+              wishesToSign, callback);
         }
       });
       // style exception, too simple
