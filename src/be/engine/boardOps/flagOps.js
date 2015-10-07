@@ -163,33 +163,39 @@ function removeFlag(flag, callback) {
 
 exports.deleteFlag = function(userLogin, flagId, callback) {
 
-  flags.findOne({
-    _id : new ObjectID(flagId)
-  }, function gotFlag(error, flag) {
-    if (error) {
-      callback(error);
-    } else if (!flag) {
-      callback(lang.errFlagNotFound);
-    } else {
+  try {
 
-      // style exception, too simple
-      boards.findOne({
-        boardUri : flag.boardUri
-      }, function gotBoard(error, board) {
-        if (error) {
-          callback(error);
-        } else if (!board) {
-          callback(lang.errBoardNotFound);
-        } else if (board.owner !== userLogin) {
-          callback(lang.deniedFlagManagement);
-        } else {
-          removeFlag(flag, callback);
-        }
-      });
-      // style exception, too simple
+    flags.findOne({
+      _id : new ObjectID(flagId)
+    }, function gotFlag(error, flag) {
+      if (error) {
+        callback(error);
+      } else if (!flag) {
+        callback(lang.errFlagNotFound);
+      } else {
 
-    }
-  });
+        // style exception, too simple
+        boards.findOne({
+          boardUri : flag.boardUri
+        }, function gotBoard(error, board) {
+          if (error) {
+            callback(error);
+          } else if (!board) {
+            callback(lang.errBoardNotFound);
+          } else if (board.owner !== userLogin) {
+            callback(lang.deniedFlagManagement);
+          } else {
+            removeFlag(flag, callback);
+          }
+        });
+        // style exception, too simple
+
+      }
+    });
+
+  } catch (error) {
+    callback(error);
+  }
 
 };
 // } Section 2: Flag deletion
