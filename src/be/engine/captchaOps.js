@@ -361,9 +361,7 @@ exports.attemptCaptcha = function(id, input, board, callback) {
     return;
   }
 
-  input = input || '';
-
-  input = input.trim();
+  input = (input || '').toString().trim().toLowerCase();
 
   if (input.length === 24) {
     id = input;
@@ -410,7 +408,7 @@ exports.solveCaptcha = function(parameters, callback) {
 
     captchas.findOneAndUpdate({
       _id : new ObjectID(parameters.captchaId),
-      answer : parameters.answer,
+      answer : (parameters.answer || '').toString().trim().toLowerCase(),
       expiration : {
         $gt : new Date()
       }
