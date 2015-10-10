@@ -244,7 +244,9 @@ exports.getGlobalSettingsData = function(userData, callback) {
 
 exports.getManagementData = function(userRole, userLogin, callback) {
 
-  if (userRole > MAX_STAFF_ROLE) {
+  var globalStaff = userRole <= MAX_STAFF_ROLE;
+
+  if (!globalStaff) {
 
     callback(lang.errDeniedGlobalManagement);
 
