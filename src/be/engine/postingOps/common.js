@@ -284,7 +284,7 @@ exports.replaceStyleMarkdown = function(message, replaceCode) {
 
   for (var i = 0; i < split.length; i++) {
 
-    split[i] = split[i].replace(/^>[^\&].+/g, greenTextFunction);
+    split[i] = split[i].replace(/^>[^\&].*/g, greenTextFunction);
     split[i] = split[i].replace(/\=\=.+\=\=/g, redTextFunction);
     split[i] = split[i].replace(/\'\'\'.+\'\'\'/g, boldFunction);
     split[i] = split[i].replace(/\'\'.+\'\'/g, italicFunction);
