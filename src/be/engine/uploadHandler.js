@@ -165,7 +165,9 @@ function updatePostingFiles(boardData, threadId, postId, file, callback,
   collectionToQuery.update(queryBlock, {
     $push : {
       files : {
-        originalName : file.title,
+        originalName : file.title.replace(/[<>]/g, function replace(match) {
+          return miscOps.htmlReplaceTable[match];
+        }),
         path : file.path,
         mime : file.mime,
         thumb : file.thumbPath,
