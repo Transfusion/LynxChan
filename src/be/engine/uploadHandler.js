@@ -267,7 +267,7 @@ function transferThumbToGfs(boardData, threadId, postId, fileId, file, cb) {
 
   if (parts.length > 1) {
 
-    var ext = parts[parts.length - 1].toLowerCase();
+    var ext = parts[parts.length - 1].toLowerCase().replace(/\W/g, '');
 
     if (file.thumbOnDisk) {
 
@@ -395,8 +395,8 @@ function generateGifThumb(boardData, threadId, postId, file, callback) {
   file.thumbOnDisk = thumbDestination;
   file.thumbMime = file.mime;
 
-  var command = 'convert \'' + file.pathInDisk + '[0]\' -resize ' + thumbSize;
-  command += 'x' + thumbSize + ' ' + thumbDestination;
+  var command = 'convert \'' + file.pathInDisk + '[0]\' -coalesce -resize ';
+  command += thumbSize + 'x' + thumbSize + ' ' + thumbDestination;
 
   exec(command, function resized(error) {
     if (error) {

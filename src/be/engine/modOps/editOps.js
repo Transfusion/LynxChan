@@ -93,7 +93,7 @@ function setNewThreadSettings(parameters, thread, callback) {
       locked : parameters.lock,
       pinned : parameters.pin,
       cyclic : parameters.cyclic,
-      autoSage : !parameters.cyclic
+      autoSage : thread.autoSage && !parameters.cyclic
     }
   }, function updatedThread(error) {
 
