@@ -62,6 +62,10 @@ exports.formatedTime = function(time) {
 
 exports.convertIpToArray = function convertIpToArray(ip) {
 
+  if (!ip) {
+    return null;
+  }
+
   if (ip.match(/\d+.\d+.\d+.\d+/)) {
     return ipv6.Address.fromAddress4(ip).toUnsignedByteArray().slice(-4);
   } else {

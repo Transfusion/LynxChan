@@ -764,6 +764,8 @@ function placeRangeBan(userData, parameters, callback) {
     return;
   }
 
+  parameters.range = processedRange;
+
   var rangeBan = {
     range : processedRange,
     appliedBy : userData.login,
@@ -788,7 +790,8 @@ function placeRangeBan(userData, parameters, callback) {
         logMessage += pieces.globalPiece;
       }
 
-      logMessage += pieces.finalPiece.replace('{$range}', parameters.range);
+      logMessage += pieces.finalPiece.replace('{$range}', parameters.range
+          .join('.'));
 
       // style exception,too simple
       logs.insert({

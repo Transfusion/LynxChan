@@ -249,54 +249,59 @@ exports.getAuthenticatedPost = function(req, res, getParameters, callback,
 
 exports.getPostData = function(req, res, callback, exceptionalMimes) {
 
-  try {
-    var parser = new multiParty.Form({
-      uploadDir : uploadDir,
-      autoFiles : true
-    });
+  var parser = new multiParty.Form({
+    uploadDir : uploadDir,
+    autoFiles : true
+  });
 
-    var filesToDelete = [];
+  var filesToDelete = [];
 
-    var endingCb = function() {
+  var endingCb = function() {
 
-      for (var j = 0; j < filesToDelete.length; j++) {
+    for (var j = 0; j < filesToDelete.length; j++) {
 
-        uploadHandler.removeFromDisk(filesToDelete[j]);
-      }
+      uploadHandler.removeFromDisk(filesToDelete[j]);
+    }
 
-    };
+  };
 
-    res.on('close', endingCb);
+  res.on('close', endingCb);
 
-    res.on('finish', endingCb);
+  res.on('finish', endingCb);
 
-    parser.on('file', function(name, file) {
+  parser.on('file', function(name, file) {
 
-      filesToDelete.push(file.path);
+    filesToDelete.push(file.path);
 
-    });
+  });
 
-    parser.on('progress', function(bytesReceived) {
-      if (bytesReceived > maxRequestSize) {
-        req.connection.destroy();
-      }
-    });
+  parser.on('error', function(error) {
 
-    parser.parse(req, function parsed(error, fields, files) {
+    if (verbose) {
+      console.log(error);
+    }
 
-      if (error) {
-        exports.outputError(error, 500, res);
-      } else {
-        processParsedRequest(res, fields, files, callback, exports
-            .getCookies(req), exceptionalMimes);
+    req.connection.destroy();
 
-      }
+  });
 
-    });
+  parser.on('progress', function(bytesReceived) {
+    if (bytesReceived > maxRequestSize) {
+      req.connection.destroy();
+    }
+  });
 
-  } catch (error) {
-    exports.outputError(error, 500, res);
-  }
+  parser.parse(req, function parsed(error, fields, files) {
+
+    if (error) {
+      exports.outputError(error, 500, res);
+    } else {
+      processParsedRequest(res, fields, files, callback, exports
+          .getCookies(req), exceptionalMimes);
+
+    }
+
+  });
 
 };
 

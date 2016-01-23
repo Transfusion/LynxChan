@@ -156,6 +156,14 @@ function processFile(parsedData, res, finalArray, toRemove, callback,
     exceptionalMimes) {
   var file = parsedData.parameters.files.shift();
 
+  if (!file.name || !file.content) {
+    exports.outputResponse(null, null, 'fileParseError', res);
+    return;
+  }
+
+  file.content = file.content.toString();
+  file.name = file.name.toString();
+
   var matches = file.content.match(/^data:([0-9A-Za-z-+\/]+);base64,(.+)$/);
 
   if (!matches) {

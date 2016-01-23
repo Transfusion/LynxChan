@@ -155,6 +155,8 @@ exports.process = function(req, res) {
         }
       }
 
+      parameters.action = parameters.action || '';
+
       var action = parameters.action.toLowerCase();
 
       var deleting = action === 'delete';
