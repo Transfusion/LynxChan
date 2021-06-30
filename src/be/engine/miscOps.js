@@ -54,6 +54,15 @@ exports.individualCaches = {
   outerClearCache : 1
 };
 
+exports.printWarning = function() {
+  var warning = 'Warning, due to a unpatched vulnerability on the package';
+  warning += ' used to send e-mails directly, the use of sendmail is now ';
+  warning += 'mandatory. To stop seeing this warning, enable the';
+  warning += ' useSendmail setting.';
+  console.log(warning);
+
+};
+
 exports.loadSettings = function() {
 
   var settings = settingsHandler.getGeneralSettings();
@@ -67,9 +76,13 @@ exports.loadSettings = function() {
   omitUnindexed = settings.omitUnindexedContent;
   verbose = settings.verbose || settings.verboseMisc;
 
-  mailer = require('nodemailer').createTransport(settings.useSendmail ? {
+  if (!settings.useSendmail) {
+    exports.printWarning();
+  }
+
+  mailer = require('nodemailer').createTransport({
     sendmail : true
-  } : require('nodemailer-direct-transport')());
+  });
 
 };
 
