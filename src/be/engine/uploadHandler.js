@@ -483,7 +483,7 @@ exports.processFile = function(file, callback) {
     }
   }, {
     upsert : true,
-    returnOriginal : false
+    returnDocument : 'after'
   }, function updatedReference(error, result) {
 
     if (error) {

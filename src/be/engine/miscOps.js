@@ -76,7 +76,7 @@ exports.loadSettings = function() {
   omitUnindexed = settings.omitUnindexedContent;
   verbose = settings.verbose || settings.verboseMisc;
 
-  if (!settings.useSendmail) {
+  if (!settings.useSendmail && !disableEmail) {
     exports.printWarning();
   }
 
