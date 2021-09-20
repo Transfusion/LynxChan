@@ -686,6 +686,12 @@ exports.getQueryForAllReports = function(ids, foundReports) {
 
   }
 
+  if (!queryOr.length) {
+    queryOr.push({
+      ip : null
+    });
+  }
+
   return {
     _id : {
       $nin : ids
