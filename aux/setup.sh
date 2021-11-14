@@ -14,7 +14,7 @@ read answerLocation
 
 stable="n"
 
-if [ "$stable" == "n" ]; then
+if [ "$stable" == "y" ]; then
 
   echo "Do you wish to change to the latest stable version? (y,n)"
   echo "Warning: if you have already started the server and inserted data, the server might not work after you change to the latest stable version. You can fix this by dropping the db and starting it again or using a different db."
@@ -27,7 +27,7 @@ if [ "$answerFrontEnd" == "y" ]; then
 
   git clone https://gitgud.io/LynxChan/PenumbraLynx.git ../src/fe
   cd ../src/fe
-  git checkout master
+  git checkout 2.7.x
   cd ../../aux
 
   echo "Default front-end installed."
