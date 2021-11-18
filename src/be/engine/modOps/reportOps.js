@@ -592,7 +592,9 @@ exports.buildBan = function(parameters, userData, report) {
   };
 
   if (typeof report.reporterId === 'string') {
-    newBan.ip = report.reporterId.split('.');
+    newBan.ip = report.reporterId.split('.').map(function(item) {
+      return +item;
+    });
   } else {
     newBan.bypassId = report.reporterId;
   }
