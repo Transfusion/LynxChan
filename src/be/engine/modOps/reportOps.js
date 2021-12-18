@@ -1182,10 +1182,6 @@ exports.getOpenReports = function(userData, parameters, language, callback) {
   reports.aggregate([ {
     $match : query
   }, {
-    $sort : {
-      creation : -1
-    }
-  }, {
     $group : {
       _id : {
         boardUri : '$boardUri',
@@ -1206,7 +1202,6 @@ exports.getOpenReports = function(userData, parameters, language, callback) {
       reasons : {
         $addToSet : '$reason'
       }
-
     }
   }, {
     $project : {
@@ -1219,6 +1214,10 @@ exports.getOpenReports = function(userData, parameters, language, callback) {
       creation : '$creation',
       categories : '$categories',
       reasons : '$reasons'
+    }
+  }, {
+    $sort : {
+      creation : -1
     }
   } ]).toArray(function(error, foundReports) {
 
