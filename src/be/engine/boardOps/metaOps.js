@@ -1002,6 +1002,9 @@ exports.aggregateThreadCount = function(boardUri, callback) {
 
   threads.countDocuments({
     boardUri : boardUri,
+    trash : {
+      $ne : true
+    },
     archived : {
       $ne : true
     }
