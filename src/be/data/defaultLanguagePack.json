@@ -17,7 +17,7 @@
   "errBoardBannerLimit": "Banner limit reached.",
   "errLoginFailed": "Login failed.",
   "errInvalidAccount": "Invalid account.",
-  "errRequestTooBig": "Request size limit exceeded.",
+  "errRequestTooBig": "Request size limit exceeded or invalid request.",
   "subPasswordRequest": "Password reset request",
   "errAccountNotFound": "Account not found.",
   "errNoEmailForAccount": "Account doesn't have an email associated to it.",
