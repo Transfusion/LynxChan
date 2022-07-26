@@ -334,7 +334,7 @@ exports.writeFile = function(path, dest, mime, meta, callback) {
 
   };
 
-  if (meta.type === 'media' && diskMedia) {
+  if (diskMedia) {
     exports.getDiskFileStats(dest, path, fileInfo, writeCallback);
   } else {
 
