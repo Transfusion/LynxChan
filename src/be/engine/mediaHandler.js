@@ -1237,7 +1237,6 @@ exports.moveToDb = function(toMove, callback) {
 exports.move = function(toDisk, callback, lastId) {
 
   var match = {
-    'metadata.type' : 'media'
   };
 
   if (lastId) {
