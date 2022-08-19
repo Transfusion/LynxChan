@@ -6,7 +6,7 @@ read answerFrontEnd
 echo "Do you wish to install the libraries? Requires node.js installed. (y,n)"
 read answerLibs
 
-echo "Do you wish to install the default settings from the example? (0.0.0.0:8080 to listen to requests, expects a database at localhost:27017) (y,n)"
+echo "Do you wish to install the default settings from the example? (0.0.0.0:8080 to listen to requests, expects a database at 127.0.0.1:27017) (y,n)"
 read answerSettings
 
 echo "Do you wish to install the necessary data to use location flags? (y,n)"
@@ -60,7 +60,7 @@ if [ "$answerSettings" == "y" ]; then
 
   cd ../../aux
 
-  echo "Default settings installed. The server will listen on 0.0.0.0:8080 and expects the database to be acessible at localhost:27017.  If you wish to change the settings, look for them at src/be/settings."
+  echo "Default settings installed. The server will listen on 0.0.0.0:8080 and expects the database to be acessible at 127.0.0.1:27017.  If you wish to change the settings, look for them at src/be/settings."
 
 fi
 
