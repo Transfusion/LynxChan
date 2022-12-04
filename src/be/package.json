@@ -9,12 +9,12 @@
   "version": "2.9.0",
   "dependencies": {
     "http-proxy": "1.18.x",
-    "mongodb": "4.4.x",
-    "formidable": "2.0.x",
-    "nodemailer": "6.7.x",
-    "parse5": "6.0.x",
-    "node-addon-api": "4.3.x",
-    "ws": "8.5.x",
+    "mongodb": "4.12.x",
+    "formidable": "2.1.x",
+    "nodemailer": "6.8.x",
+    "parse5": "7.1.x",
+    "node-addon-api": "5.0.x",
+    "ws": "8.11.x",
     "bufferutil": "4.0.x",
     "utf-8-validate": "5.0.x"
   },
