@@ -472,7 +472,7 @@ exports.removeFile = function(userData, parameters, language, posting, cb) {
     } else {
 
       mediaHandler.deleteFiles(null, [ removed.sha256 ], userData, language,
-          cb, true);
+          false, cb, true);
     }
 
   });
