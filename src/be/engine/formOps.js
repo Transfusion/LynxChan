@@ -29,6 +29,8 @@ var useCacheControl;
 var uploadHandler;
 var mediaThumb;
 
+exports.MAX_FILENAME = 256;
+
 exports.loadSettings = function() {
 
   var settings = require('../settingsHandler').getGeneralSettings();
@@ -136,7 +138,7 @@ exports.getFileData = function(file, fields, mime, callback) {
   var toPush = {
     size : file.size,
     sha256 : file.sha256,
-    title : file.name,
+    title : (file.name || '').substring(0, exports.MAX_FILENAME),
     pathInDisk : file.path,
     mime : mime
   };
@@ -434,7 +436,7 @@ exports.getMetaData = function(fields) {
       spoiler : spoiled[i],
       sha256 : sha256[i],
       mime : mime[i],
-      title : name[i]
+      title : name[i].substring(0, exports.MAX_FILENAME)
     });
 
   }
