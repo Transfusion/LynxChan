@@ -5,6 +5,7 @@
 var spoilerPath = require('../../kernel').spoilerImage();
 var db = require('../../db');
 var boards = db.boards();
+var latestImages = db.latestImages();
 var threads = db.threads();
 var posts = db.posts();
 var common;
@@ -35,12 +36,26 @@ exports.getAdaptedFileArray = function(board, files) {
 
 };
 
-exports.getOperations = function(threadOps, postOps, foundThreads, foundPosts,
-    board) {
+exports.getOperations = function(threadOps, postOps, latestOps, foundThreads,
+    foundPosts, board) {
 
   for (var i = 0; i < foundThreads.length; i++) {
 
     var thread = foundThreads[i];
+
+    latestOps.push({
+      updateOne : {
+        filter : {
+          boardUri : board.boardUri,
+          threadId : thread.threadId
+        },
+        update : {
+          $set : {
+            thumb : spoilerPath
+          }
+        }
+      }
+    });
 
     threadOps.push({
       updateOne : {
@@ -61,6 +76,20 @@ exports.getOperations = function(threadOps, postOps, foundThreads, foundPosts,
   for (i = 0; i < foundPosts.length; i++) {
 
     var post = foundPosts[i];
+
+    latestOps.push({
+      updateOne : {
+        filter : {
+          boardUri : board.boardUri,
+          postId : post.postId
+        },
+        update : {
+          $set : {
+            thumb : spoilerPath
+          }
+        }
+      }
+    });
 
     postOps.push({
       updateOne : {
@@ -136,22 +165,18 @@ exports.queueReloads = function(board, parentThreads, foundThreads, foundPosts,
 
   }
 
+  process.send({
+    frontPage : true
+  });
+
   callback();
 
 };
 
-exports.spoilPosts = function(board, postOps, foundThreads, foundPosts,
-    parentThreads, callback) {
+exports.updateLatestImages = function(board, parentThreads, foundThreads,
+    foundPosts, latestOps, callback) {
 
-  if (!postOps.length) {
-    exports.queueReloads(board, parentThreads, foundThreads, foundPosts,
-        callback);
-
-    return;
-  }
-
-  posts.bulkWrite(postOps, function updatedPosts(error) {
-
+  latestImages.bulkWrite(latestOps, function(error) {
     if (error) {
       callback(error);
     } else {
@@ -164,17 +189,43 @@ exports.spoilPosts = function(board, postOps, foundThreads, foundPosts,
 
 };
 
+exports.spoilPosts = function(board, postOps, latestOps, foundThreads,
+    foundPosts, parentThreads, callback) {
+
+  if (!postOps.length) {
+    exports.updateLatestImages(board, parentThreads, foundThreads, foundPosts,
+        latestOps, callback);
+
+    return;
+  }
+
+  posts.bulkWrite(postOps, function updatedPosts(error) {
+
+    if (error) {
+      callback(error);
+    } else {
+
+      exports.updateLatestImages(board, parentThreads, foundThreads,
+          foundPosts, latestOps, callback);
+
+    }
+  });
+
+};
+
 exports.spoilBoardFiles = function(foundThreads, foundPosts, board,
     parentThreads, callback) {
 
   var threadOps = [];
+  var latestOps = [];
   var postOps = [];
 
-  exports.getOperations(threadOps, postOps, foundThreads, foundPosts, board);
+  exports.getOperations(threadOps, postOps, latestOps, foundThreads,
+      foundPosts, board);
 
   if (!threadOps.length) {
-    exports.spoilPosts(board, postOps, foundThreads, foundPosts, parentThreads,
-        callback);
+    exports.spoilPosts(board, postOps, latestOps, foundThreads, foundPosts,
+        parentThreads, callback);
     return;
   }
 
@@ -184,7 +235,7 @@ exports.spoilBoardFiles = function(foundThreads, foundPosts, board,
       callback(error);
     } else {
 
-      exports.spoilPosts(board, postOps, foundThreads, foundPosts,
+      exports.spoilPosts(board, postOps, latestOps, foundThreads, foundPosts,
           parentThreads, callback);
 
     }

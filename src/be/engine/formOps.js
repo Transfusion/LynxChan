@@ -491,10 +491,10 @@ exports.getPostData = function(req, res, callback, arrayParams) {
 
   parser.on('file', function(name, file) {
 
-
     file = JSON.parse(JSON.stringify(file));
 
-    //shit changed on the library and I can't be assed to fix all over the codebase
+    // shit changed on the library and I can't be assed to fix all over the
+    // codebase
     file.path = file.filepath;
     file.name = file.originalFilename;
     file.type = file.mimetype;
