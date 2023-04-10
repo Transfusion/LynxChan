@@ -11,7 +11,7 @@ var logger = require('../logger');
 var redirects = db.redirects();
 var files = db.files();
 var chunks = db.chunks();
-var bucket = new (require('mongodb')).GridFSBucket(db.conn());
+var bucket = new (require('mongodb-legacy')).GridFSBucket(db.conn());
 var disable304;
 var verbose;
 var alternativeLanguages;
@@ -334,7 +334,7 @@ exports.writeFile = function(path, dest, mime, meta, callback) {
 
   };
 
-  if (meta.type === 'media' && diskMedia) {
+  if (diskMedia) {
     exports.getDiskFileStats(dest, path, fileInfo, writeCallback);
   } else {
 

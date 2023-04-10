@@ -3,7 +3,7 @@
 // Handles the language package and alternative languages
 
 var fs = require('fs');
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var dbLanguages = require('../db').languages();
 var verbose;

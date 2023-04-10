@@ -5,7 +5,7 @@ var dbVersion = 16;
 // takes care of the database.
 // initializes and provides pointers to collections or the connection pool
 
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var cluster = require('cluster');
 var kernel = require('./kernel');
 var migrations;
@@ -1035,35 +1035,27 @@ function initCollections(callback) {
 
 }
 
-function connect(connectString, dbToUse, callback, attempts) {
+async function connect(connectString, dbToUse, callback, attempts) {
 
   attempts = attempts || 0;
 
-  mongo.MongoClient.connect(connectString, {
-    useNewUrlParser : true,
-    useUnifiedTopology : true
-  }, function connectedDb(error, client) {
+  cachedClient = new mongo.MongoClient(connectString);
+  
+  await cachedClient.connect().then(function(msg){
+    cachedDb = cachedClient.db(dbToUse);
+    initCollections(callback);
+  }).catch(function(error) {
 
-    if (error) {
-
-      if (attempts > 9) {
-        callback(error);
-      } else {
-
-        console.log(error);
-        console.log('Retrying in 10 seconds');
-
-        setTimeout(function() {
-          connect(connectString, dbToUse, callback, ++attempts);
-        }, 10000);
-      }
-
+    if (attempts > 9) {
+      callback(error);
     } else {
 
-      cachedClient = client;
-      cachedDb = client.db(dbToUse);
+      console.log(error);
+      console.log('Retrying in 10 seconds');
 
-      initCollections(callback);
+      setTimeout(function() {
+        connect(connectString, dbToUse, callback, ++attempts);
+      }, 10000);
     }
 
   });
@@ -1089,7 +1081,7 @@ exports.init = function(callback) {
   }
 
   connectString += dbSettings.address + ':';
-  connectString += dbSettings.port + '/' + dbSettings.db;
+  connectString += dbSettings.port;
 
   if (dbSettings.ssl) {
     connectString += '?ssl=true';

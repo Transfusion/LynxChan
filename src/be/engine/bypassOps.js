@@ -1,7 +1,7 @@
 'use strict';
 
 var crypto = require('crypto');
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var db = require('../db');
 var lang;

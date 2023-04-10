@@ -9,14 +9,14 @@
   "version": "2.9.0",
   "dependencies": {
     "http-proxy": "1.18.x",
-    "mongodb": "4.12.x",
+    "mongodb-legacy": "5.0.x",
     "formidable": "2.1.x",
-    "nodemailer": "6.8.x",
+    "nodemailer": "6.9.x",
     "parse5": "7.1.x",
-    "node-addon-api": "5.0.x",
-    "ws": "8.11.x",
+    "node-addon-api": "6.0.x",
+    "ws": "8.13.x",
     "bufferutil": "4.0.x",
-    "utf-8-validate": "5.0.x"
+    "utf-8-validate": "6.0.x"
   },
   "gypfile": true,
   "author": "Stephen Lynx",

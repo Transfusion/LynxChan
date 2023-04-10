@@ -3,7 +3,7 @@
 // operations for captcha generation and solving
 
 var url = require('url');
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var exec = require('child_process').exec;
 var native = require('../kernel').native;

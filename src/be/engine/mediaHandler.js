@@ -1,7 +1,7 @@
 'use strict';
 
 var fs = require('fs');
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var db = require('../db');
 var bucket = new (require('mongodb')).GridFSBucket(db.conn());
@@ -1237,7 +1237,6 @@ exports.moveToDb = function(toMove, callback) {
 exports.move = function(toDisk, callback, lastId) {
 
   var match = {
-    'metadata.type' : 'media'
   };
 
   if (lastId) {

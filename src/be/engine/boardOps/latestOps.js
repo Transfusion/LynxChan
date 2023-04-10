@@ -1,6 +1,6 @@
 'use strict';
 
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var logger = require('../../logger');
 var db = require('../../db');

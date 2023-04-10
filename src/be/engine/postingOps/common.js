@@ -3,7 +3,7 @@
 // handles operations common to user posting
 
 var fs = require('fs');
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var crypto = require('crypto');
 var taskListener = require('../../taskListener');

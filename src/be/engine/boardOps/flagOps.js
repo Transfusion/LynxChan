@@ -2,7 +2,7 @@
 
 // handles flag management operations on boards
 
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var ObjectID = mongo.ObjectId;
 var maxFlagSize;
 var gridFsHandler;

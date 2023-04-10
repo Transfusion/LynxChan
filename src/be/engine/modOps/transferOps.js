@@ -2,7 +2,7 @@
 
 // handles operations related to the transfer of threads between boards
 
-var mongo = require('mongodb');
+var mongo = require('mongodb-legacy');
 var spoilerPath = require('../../kernel').spoilerImage();
 var logger = require('../../logger');
 var db = require('../../db');

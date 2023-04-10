@@ -1,7 +1,7 @@
 # Dependencies
 Required modules:
 * http-proxy: used on sharding so the master server can act as a reverse-proxy and pass the request to slaves.
-* mongodb: database driver.
+* mongodb-legacy: database driver.
 * formidable: used when parsing requests to the form api.
 * nodemailer: used to send e-mails for people resetting account passwords.
 * nodemailer-direct-transport: used by nodemailer to send e-mails directly from the engine.
