@@ -21,15 +21,15 @@ See other branches named like `1.1.x` for stable versions. They will receive onl
 * [Sendmail](https://www.proofpoint.com/us/open-source-email-solution) 8.14.7 used to send e-mails.
 
 # Optional dependencies
-* [ffmpeg](https://www.ffmpeg.org/) 4.2 if mediaThumb setting is enabled. Requires zlib-devel on Rocky Linux to work properly when compiled from source.
-* [file](http://www.darwinsys.com/file/) 5.11 if the option to validate upload mimetypes is enabled.
+* [ffmpeg](https://www.ffmpeg.org/) 4.2 if mediaThumb setting is enabled. Requires zlib-devel on Rocky Linux to work properly when compiled from source. If you use the wrong version, native functions might not work.
+* [file](http://www.darwinsys.com/file/) 5.39 if the option to validate upload mimetypes is enabled.
 * [exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/) 11.01 if the option to strip exif data is enabled.
 
-# Optional but recommended dependencies
-* [Magick++ with headers](https://imagemagick.org/Magick++/) ImageMagick-c++-devel 6.9.10.64 to be more precise.
-* [GNU Make](https://www.gnu.org/software/make/) 1:4.2.1-9.
-* [Python](https://www.python.org/) 2.7.15-24.
-* [GCC C++](https://gcc.gnu.org/) 8.2.1-3.5.
+# Optional but recommended dependencies. Don't worry about exact versions unless they don't work.
+* [Magick++ with headers](https://imagemagick.org/Magick++/) ImageMagick-c++-devel 6.9.12.86 to be more precise.
+* [GNU Make](https://www.gnu.org/software/make/) 4.3.
+* [Python](https://www.python.org/) 3.9.14.
+* [GCC C++](https://gcc.gnu.org/) 11.3.1.
 
 If you need help installing these, consult doc/Dependencies.txt.
 

@@ -7,6 +7,12 @@
   },
   {
     "type": "range",
+    "limit": 4,
+    "setting": "extraBypassMinRole",
+    "element": "comboMinExtraBypassRole"
+  },
+  {
+    "type": "range",
     "limit": 2,
     "setting": "pruningMode",
     "element": "comboPruningMode"

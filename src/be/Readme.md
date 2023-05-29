@@ -90,6 +90,7 @@ Settings files that goes into the settings directory:
 `general.json`: contains general settings for the application. Holds the following settings:
 * `unlockHistory`(Boolean): if true, users that can't see plain text ips can still see a user's history across boards.
 * `disableBanCaptcha`(Boolean): if true, bans will never require captchas for anyone.
+* `extraBypassMinRole`(Number): minimum role required for people to use extra bypass tools. The tools are: pruning unused bypasses and disabling the creation of new bypasses. Defaults to admin.
 * `useHttp2`(Boolean): if true, the engine will use HTTP2 for HTTPS.
 * `lowercaseBoardUris`(Boolean): if true, all new boards will use lowercase uris.
 * `trustedProxies`(Array): list of ips of the trusted proxies. Trusted proxies will have the x-forwarded-for taken in account to get the ip. By default, localhost and the lynxchan cluster master are also trusted proxies. Also, if the first trusted proxy is '*', then all requests will be treated as coming from trusted proxies.
