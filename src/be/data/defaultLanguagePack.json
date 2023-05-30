@@ -13,6 +13,7 @@
   "errDeniedChangeUser": "You are not allowed to change this user's role.",
   "errNoNewAccounts": "Account creation is disabled.",
   "errInvalidLogin": "Invalid login.",
+  "errNoNewBypasses": "Creation of new bypasses is currently disabled.",
   "errTooManyFlags": "This board exceeded the flag limit.",
   "errLoginInUse": "Login is already in use.",
   "msgUriChanged": "Uri changed.",

@@ -794,9 +794,9 @@ TEM_ID::10
 gManagement: global management page.
 
 Elements:
-checkboxToggleNewBypasses:
+checkboxDisableNewBypasses:
     use: might be turned on.
-    description: checkbox that indicates if the creation of new bypasses is toggled.
+    description: checkbox that indicates if the creation of new bypasses is disabled.
 
 extraBypassesToolsDiv:
     use: might be removed.
@@ -2062,6 +2062,10 @@ Elements:
 checkboxAutoMediaBan:
     use: might be checked.
     description: indicates if auto media ban is enabled.
+
+checkboxDisableNewBypasses:
+    use: might be turned on.
+    description: checkbox that indicates if the creation of new bypasses is disabled.
 
 fieldAutoCaptchaLimit:
     use: have it's value manipulated.

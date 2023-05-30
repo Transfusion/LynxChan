@@ -11,10 +11,11 @@ var minClearIpRole;
 var boardMessageLength;
 var globalBoardModeration;
 var extraBypassLevel;
+var disableNewBypasses;
 
 exports.loadSettings = function() {
-
   settings = require('../../../settingsHandler').getGeneralSettings();
+  disableNewBypasses = settings.disableNewBypasses;
   customJs = settings.allowBoardCustomJs;
   volunteerSettings = settings.allowVolunteerSettings;
   minClearIpRole = settings.clearIpMinRole;
@@ -546,7 +547,14 @@ exports.processHideableElements = function(document, userRole, staff, language,
   
   if (userRole <= extraBypassLevel) {
     document = document.replace('__extraBypassesToolsDiv_location__',
-        removable.extraBypassesToolsDiv);
+        removable.extraBypassesToolsDiv)
+        
+    if (disableNewBypasses) {
+      return document.replace('__checkboxDisableNewBypasses_checked__', 'true');
+    } else {
+      return document.replace('checked="__checkboxDisableNewBypasses_checked__"', '');
+    }   
+        
   } else {
     document = document.replace(
         '__extraBypassesToolsDiv_location__', '');

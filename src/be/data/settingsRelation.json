@@ -509,6 +509,11 @@
   },
   {
     "type": "boolean",
+    "setting": "disableNewBypasses",
+    "element": "checkboxDisableNewBypasses"
+  },
+  {
+    "type": "boolean",
     "setting": "disableBanCaptcha",
     "element": "checkboxDisableBanCaptcha"
   },

@@ -254,7 +254,7 @@
     "template": "gManagement",
     "prebuiltFields": {
       "extraBypassesToolsDiv": "removal",
-      "checkboxToggleNewBypasses": "checked",
+      "checkboxDisableNewBypasses": "checked",
       "customThumbsLink": "removal",
       "trashBinLabel": "inner",
       "appealedBansLabel": "inner",
@@ -493,6 +493,7 @@
     "prebuiltFields": {
       "checkboxWebsocketData": "checked",
       "checkboxAutoMediaBan": "checked",
+      "checkboxDisableNewBypasses": "checked",
       "checkboxNoReportCaptcha": "checked",
       "fieldAutoCaptchaLimit": "value",
       "authDiv": "removal",

@@ -15,10 +15,12 @@ var bypassMode;
 var hourlyLimit;
 var validationRange;
 var versatileOps;
+var disableNewBypasses;
 
 exports.loadSettings = function() {
   var settings = require('../settingsHandler').getGeneralSettings();
 
+  disableNewBypasses = settings.disableNewBypasses;
   floodExpiration = settings.floodTimerSec;
   hourlyLimit = 600 / floodExpiration;
   bypassMaxPosts = settings.bypassMaxPosts;
@@ -83,6 +85,8 @@ exports.renewBypass = function(captchaId, captchaInput, language, callback) {
 
   if (!bypassMode) {
     return callback(lang(language).errDisabledBypass);
+  } else if(disableNewBypasses) {
+    return callback(lang(language).errNoNewBypasses);
   }
 
   captchaOps.attemptCaptcha(captchaId, captchaInput, null, language,
