@@ -794,9 +794,13 @@ TEM_ID::10
 gManagement: global management page.
 
 Elements:
-purgeBypassesForm:
+checkboxToggleNewBypasses:
+    use: might be turned on.
+    description: checkbox that indicates if the creation of new bypasses is toggled.
+
+extraBypassesToolsDiv:
     use: might be removed.
-    description: form used to purge block bypasses.
+    description: div used to show extra bypasses tools.
 
 trashBinLabel:
     use: have it's innerHTML manipulated.

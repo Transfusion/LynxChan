@@ -253,7 +253,8 @@
   {
     "template": "gManagement",
     "prebuiltFields": {
-      "purgeBypassesForm": "removal",
+      "extraBypassesToolsDiv": "removal",
+      "checkboxToggleNewBypasses": "checked",
       "customThumbsLink": "removal",
       "trashBinLabel": "inner",
       "appealedBansLabel": "inner",

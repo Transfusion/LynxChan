@@ -10,6 +10,7 @@ var miscOps;
 var minClearIpRole;
 var boardMessageLength;
 var globalBoardModeration;
+var extraBypassLevel;
 
 exports.loadSettings = function() {
 
@@ -19,6 +20,7 @@ exports.loadSettings = function() {
   minClearIpRole = settings.clearIpMinRole;
   boardMessageLength = settings.boardMessageLength;
   globalBoardModeration = settings.allowGlobalBoardModeration;
+  extraBypassLevel = settings.extraBypassMinRole;
 
 };
 
@@ -534,14 +536,20 @@ exports.processHideableElements = function(document, userRole, staff, language,
     document = document.replace(
         '__divStaff_children__',
         exports.getStaffDiv(exports.getPossibleRoles(userRole, language),
-            staff, language)).replace('__purgeBypassesForm_location__',
-        removable.purgeBypassesForm);
+            staff, language));
 
   } else {
     document = document.replace('__addStaffForm_location__', '');
     document = document.replace('__massBanPanel_location__', '');
-    document = document.replace('__divStaff_location__', '').replace(
-        '__purgeBypassesForm_location__', '');
+    document = document.replace('__divStaff_location__', '');
+  }
+  
+  if (userRole <= extraBypassLevel) {
+    document = document.replace('__extraBypassesToolsDiv_location__',
+        removable.extraBypassesToolsDiv);
+  } else {
+    document = document.replace(
+        '__extraBypassesToolsDiv_location__', '');
   }
 
   return document;
