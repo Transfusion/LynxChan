@@ -253,7 +253,8 @@
   {
     "template": "gManagement",
     "prebuiltFields": {
-      "purgeBypassesForm": "removal",
+      "extraBypassesToolsDiv": "removal",
+      "checkboxDisableNewBypasses": "checked",
       "customThumbsLink": "removal",
       "trashBinLabel": "inner",
       "appealedBansLabel": "inner",
@@ -492,6 +493,7 @@
     "prebuiltFields": {
       "checkboxWebsocketData": "checked",
       "checkboxAutoMediaBan": "checked",
+      "checkboxDisableNewBypasses": "checked",
       "checkboxNoReportCaptcha": "checked",
       "fieldAutoCaptchaLimit": "value",
       "authDiv": "removal",
@@ -618,6 +620,7 @@
       "checkboxUseAlternativeLanguages": "checked",
       "comboBypassMode": "children",
       "comboPruningMode": "children",
+      "comboMinExtraBypassRole": "children",
       "comboCaptchaMode": "children",
       "comboSsl": "children",
       "comboTorPostingLevel": "children",

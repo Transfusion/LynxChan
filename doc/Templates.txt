@@ -794,9 +794,13 @@ TEM_ID::10
 gManagement: global management page.
 
 Elements:
-purgeBypassesForm:
+checkboxDisableNewBypasses:
+    use: might be turned on.
+    description: checkbox that indicates if the creation of new bypasses is disabled.
+
+extraBypassesToolsDiv:
     use: might be removed.
-    description: form used to purge block bypasses.
+    description: div used to show extra bypasses tools.
 
 trashBinLabel:
     use: have it's innerHTML manipulated.
@@ -2059,6 +2063,10 @@ checkboxAutoMediaBan:
     use: might be checked.
     description: indicates if auto media ban is enabled.
 
+checkboxDisableNewBypasses:
+    use: might be turned on.
+    description: checkbox that indicates if the creation of new bypasses is disabled.
+
 fieldAutoCaptchaLimit:
     use: have it's value manipulated.
     description: field with the thread limit required for automatic captcha activation on a board.
@@ -2114,6 +2122,10 @@ checkboxLowercaseBoardUris:
 comboCaptchaMode:
     use: have children appended to it.
     description: combobox with the available captcha security levels.
+
+comboMinExtraBypassRole:
+    use: have children appended to it.
+    description: combobox with the role required to use extra bypass tools.
 
 fieldMaxFilterLength:
     use: have it's value manipulated.

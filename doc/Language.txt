@@ -13,6 +13,7 @@ Alternative language packs can contain entries not contained in the default pack
 
 The structure of this json is as follows:
 
+errNoNewBypasses: error thrown when the creation of new bypasses is disabled and the user tries to create one.
 errDeniedThumbManagement: error thrown when the user is not allowed to manage custom mime thumbs.
 errDeniedSingleDeletion: error thrown when the user is not allowed to perform the deletion of a single file in a post.
 errDeniedOffenseHistory: error thrown when the user tries to access the offense history of a user he is not allowed to.
@@ -60,7 +61,7 @@ errDeniedGlobalManagement: error throw when the user is not allowed to view glob
 errThreadNotFound: error thrown when the specified thread of an operation cannot be found.
 errThreadLocked: error thrown when the user tries to reply to a locked thread.
 errBypassPurgeConfirmation: error thrown when the user fails to confirm a block bypass purge. Replaced: {$count}.
-errDeniedBypassPurge: error thrown when the user is not allowed to purge block bypasses.
+errDeniedExtraBypass: error thrown when the user is not allowed to use extra bypass tools.
 errDeniedBoardBanManagement: error thrown when the user is not allowed to manage bans for a board.
 errDeniedGlobalBanManagement: error thrown when the user is not allowed to manage global bans.
 errDeniedBoardASNBanManagement: error thrown when the user is not allowed to manage ASN bans for a board.
@@ -258,6 +259,7 @@ msgReportsClosed: message used after closing reports.
 msgContentReported: message used after reporting content.
 msgRestored: message used after restoring content from the trash bin.
 msgUsersBanned: message used after banning users.
+msgBypassesToggled: message used after toggling new bypasses on or off.
 msgContentDeleted: message used after deleting content. Replaces: {$threads}, {$posts}.
 msgBannerCreated: message used after creating a board banner.
 msgBoardCreated: message used after creating a board.

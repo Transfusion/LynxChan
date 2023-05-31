@@ -7,6 +7,12 @@
   },
   {
     "type": "range",
+    "limit": 4,
+    "setting": "extraBypassMinRole",
+    "element": "comboMinExtraBypassRole"
+  },
+  {
+    "type": "range",
     "limit": 2,
     "setting": "pruningMode",
     "element": "comboPruningMode"
@@ -500,6 +506,11 @@
     "type": "boolean",
     "setting": "websocketData",
     "element": "checkboxWebsocketData"
+  },
+  {
+    "type": "boolean",
+    "setting": "disableNewBypasses",
+    "element": "checkboxDisableNewBypasses"
   },
   {
     "type": "boolean",
