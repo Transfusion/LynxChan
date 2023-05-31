@@ -615,6 +615,20 @@ exports.loadSettings = function() {
 };
 // } Section 2: Load settings
 
+exports.toggleNewBypasses = function(userData, newValue, language, callback) {
+
+  var allowed = userData.globalRole <= generalSettings.extraBypassMinRole;
+
+  if (!allowed) {
+    return callback(require('./engine/langOps').languagePack(language).errDeniedExtraBypass);
+  }
+
+  generalSettings.disableNewBypasses = newValue;
+
+  writeNewSettings(generalSettings, language, callback);
+
+};
+
 exports.getDefaultSettings = function() {
   return defaultSettings;
 };

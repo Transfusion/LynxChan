@@ -6,6 +6,7 @@
     "mainPiece": " changed the global role of user {$login} to {$role}."
   },
   "guiNoPreferredLanguage": "None",
+  "msgBypassesToggled": "New bypasses toggled.",
   "errInvalidRole": "Invalid role.",
   "errDeniedPermissionLevel": "You are not allowed to grant this level of permission to users.",
   "errSelfRoleChange": "You cannot change your own role.",
@@ -20,7 +21,7 @@
   "errBoardBannerLimit": "Banner limit reached.",
   "errBypassPurgeConfirmation": "You must confirm you wish to purge {$count} block bypasses.",
   "errLoginFailed": "Login failed.",
-  "errDeniedBypassPurge": "You are not allowed to purge block bypasses.",
+  "errDeniedExtraBypass": "You are not allowed to use extra bypass tools.",
   "msgBypassesPurged": "Block bypasses purged.",
   "errInvalidAccount": "Invalid account.",
   "errRequestTooBig": "Request size limit exceeded or invalid request.",

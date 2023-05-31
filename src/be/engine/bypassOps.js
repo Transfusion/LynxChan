@@ -16,6 +16,7 @@ var hourlyLimit;
 var validationRange;
 var versatileOps;
 var disableNewBypasses;
+var extraBypassRole;
 
 exports.loadSettings = function() {
   var settings = require('../settingsHandler').getGeneralSettings();
@@ -28,6 +29,7 @@ exports.loadSettings = function() {
   floodDisabled = settings.disableFloodCheck;
   validationRange = settings.bypassValidationRange;
   expirationToAdd = settings.bypassDurationHours;
+  extraBypassRole = settings.extraBypassMinRole;
 };
 
 exports.loadDependencies = function() {
@@ -85,7 +87,7 @@ exports.renewBypass = function(captchaId, captchaInput, language, callback) {
 
   if (!bypassMode) {
     return callback(lang(language).errDisabledBypass);
-  } else if(disableNewBypasses) {
+  } else if (disableNewBypasses) {
     return callback(lang(language).errNoNewBypasses);
   }
 
@@ -355,10 +357,10 @@ exports.useBypass = function(bypassId, req, callback, thread) {
 
 exports.purgeBypasses = function(userData, parameters, language, callback) {
 
-  var admin = userData.globalRole < 2;
+  var admin = userData.globalRole <= extraBypassRole;
 
   if (!admin) {
-    return callback(lang(language).errDeniedBypassPurge);
+    return callback(lang(language).errDeniedExtraBypass);
   }
 
   var matchBlock = {};
