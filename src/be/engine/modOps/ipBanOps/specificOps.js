@@ -632,7 +632,7 @@ exports.ban = function(userData, reportedObjects, parameters, captchaId,
 };
 // } Section 1: Ban
 
-exports.appealBan = function(ip, parameters, language, callback) {
+exports.appealBan = function(ip, bypass, parameters, language, callback) {
 
   try {
     parameters.banId = new ObjectID(parameters.banId);
@@ -649,7 +649,9 @@ exports.appealBan = function(ip, parameters, language, callback) {
     }
   }, {
     $set : {
-      appeal : parameters.appeal
+      appeal : parameters.appeal,
+      appealIp : ip,
+      appealBypass : bypass
     }
   }, function gotBan(error, result) {
 

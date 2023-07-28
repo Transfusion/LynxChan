@@ -235,6 +235,8 @@ bans: stores bans.
     range(Array): range of the ban. Only includes the first half of the ip.
     reason: reason of the ban. 256 characters.
     ip(Array): banned ip.
+    appealIp(Array): ip used to appeal it.
+    appealBypass*: _id of the bypass used to appeal it.
     boardUri*: board of the ban. If not set, the ban is global.
     appeal: appeal sent by the user. 512 characters.
     denied(Boolean): indicates if the appeal was denied.

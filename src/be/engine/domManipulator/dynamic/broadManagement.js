@@ -534,30 +534,27 @@ exports.processHideableElements = function(document, userRole, staff, language,
 
     document = document.replace('__newStaffCombo_children__', exports
         .getNewStaffComboBox(userRole, language));
-    document = document.replace(
-        '__divStaff_children__',
-        exports.getStaffDiv(exports.getPossibleRoles(userRole, language),
-            staff, language));
+    document = document.replace('__divStaff_children__', exports.getStaffDiv(
+        exports.getPossibleRoles(userRole, language), staff, language));
 
   } else {
-    document = document.replace('__addStaffForm_location__', '');
-    document = document.replace('__massBanPanel_location__', '');
-    document = document.replace('__divStaff_location__', '');
+    document = document.replace('__addStaffForm_location__', '').replace(
+        '__massBanPanel_location__', '').replace('__divStaff_location__', '');
   }
-  
+
   if (userRole <= extraBypassLevel) {
     document = document.replace('__extraBypassesToolsDiv_location__',
-        removable.extraBypassesToolsDiv)
-        
+        removable.extraBypassesToolsDiv);
+
     if (disableNewBypasses) {
       return document.replace('__checkboxDisableNewBypasses_checked__', 'true');
     } else {
-      return document.replace('checked="__checkboxDisableNewBypasses_checked__"', '');
-    }   
-        
+      return document.replace(
+          'checked="__checkboxDisableNewBypasses_checked__"', '');
+    }
+
   } else {
-    document = document.replace(
-        '__extraBypassesToolsDiv_location__', '');
+    document = document.replace('__extraBypassesToolsDiv_location__', '');
   }
 
   return document;

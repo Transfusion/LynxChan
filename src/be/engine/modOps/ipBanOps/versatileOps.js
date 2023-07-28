@@ -471,6 +471,28 @@ exports.getLiftedBanLogMessage = function(ban, userData) {
   return logMessage;
 };
 
+exports.insertRemovalLog = function(ban, userData, callback) {
+
+  if (ban.range || ban.asn) {
+    callback(null, ban.asn ? 'asn' : 'range', ban.boardUri);
+    return;
+  }
+
+  var logMessage = exports.getLiftedBanLogMessage(ban, userData);
+
+  logOps.insertLog({
+    user : userData.login,
+    global : ban.boardUri ? false : true,
+    time : new Date(),
+    description : logMessage,
+    type : 'banLift',
+    boardUri : ban.boardUri
+  }, function insertedLog() {
+    callback(null, null, ban.boardUri);
+  });
+
+};
+
 exports.removeBan = function(ban, userData, callback) {
 
   bans.deleteOne({
@@ -478,29 +500,42 @@ exports.removeBan = function(ban, userData, callback) {
   }, function banRemoved(error) {
 
     if (error) {
-      callback(error);
-    } else {
+      return callback(error);
+    }
 
-      if (ban.range || ban.asn) {
-        callback(null, ban.asn ? 'asn' : 'range', ban.boardUri);
-        return;
+    if (ban.appealBypass || ban.appealIp) {
+
+      var collateralRemove = {
+        boardUri : ban.boardUri ? ban.boardUri : {
+          $exists : false
+        },
+        $or : []
+      };
+
+      if (ban.appealBypass) {
+        collateralRemove.$or.push({
+          bypassId : ban.appealBypass
+        });
       }
 
-      // style exception, too simple
-      var logMessage = exports.getLiftedBanLogMessage(ban, userData);
+      if (ban.appealBypass) {
+        collateralRemove.$or.push({
+          ip : ban.appealIp
+        });
+      }
 
-      logOps.insertLog({
-        user : userData.login,
-        global : ban.boardUri ? false : true,
-        time : new Date(),
-        description : logMessage,
-        type : 'banLift',
-        boardUri : ban.boardUri
-      }, function insertedLog() {
-        callback(null, null, ban.boardUri);
+      bans.deleteMany(collateralRemove, function(error) {
+
+        if (error) {
+          callback(error);
+        } else {
+          exports.insertRemovalLog(ban, userData, callback);
+        }
+
       });
-      // style exception, too simple
 
+    } else {
+      exports.insertRemovalLog(ban, userData, callback);
     }
 
   });
