@@ -742,10 +742,15 @@ exports.checkForLatestContent = function(document, latestImages, latestPosts,
 
   if (!latestImages) {
     document = document.replace('__divLatestImages_location__', '');
+    document = document.replace('__divLatestImagesMobile_location__', '');
   } else {
     document = document.replace('__divLatestImages_location__',
         removable.divLatestImages);
     document = document.replace('__divLatestImages_children__', exports
+        .getLatestImages(latestImages, language));
+    document = document.replace('__divLatestImagesMobile_location__',
+        removable.divLatestImagesMobile);
+    document = document.replace('__divLatestImagesMobile_children__', exports
         .getLatestImages(latestImages, language));
 
   }
